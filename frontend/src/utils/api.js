@@ -61,11 +61,24 @@ export const fetchProductBySlug = async (slug) => {
   }
 };
 
+export const getImageUrl = (imagePath) => {
+  if (!imagePath) return null;
+  if (imagePath.startsWith('http')) return imagePath;
+  const baseUrl = API_BASE_URL.replace(/\/api\/?$/, '');
+  return `${baseUrl}${imagePath}`;
+};
+
 export const formatPrice = (price) => {
   if (!price) return '₹0';
+  
+  if (typeof price === 'string' && !/^\d+(\.\d+)?$/.test(price)) {
+    return price.includes('₹') ? price : `₹${price}`;
+  }
+
+  const numPrice = Number(price);
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
     maximumFractionDigits: 0,
-  }).format(price);
+  }).format(numPrice);
 };

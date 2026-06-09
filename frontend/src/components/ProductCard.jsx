@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { formatPrice } from '../data/products'
+import { formatPrice, getImageUrl } from '../utils/api'
 
 const gradientStyles = {
   'product-gradient-1': 'from-ocean to-cyan',
@@ -24,24 +24,31 @@ export default function ProductCard({ product }) {
       to={`/products/${product.slug}`}
       className="group block card-hover rounded-2xl bg-white shadow-md overflow-hidden"
     >
-      {/* Image placeholder with gradient */}
+      {/* Image or placeholder with gradient */}
       <div
-        className={`relative h-48 sm:h-52 bg-gradient-to-br ${gradientClass} overflow-hidden`}
+        className={`relative h-48 sm:h-52 bg-gradient-to-br ${gradientClass} overflow-hidden flex items-center justify-center`}
       >
-        {/* Decorative elements */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-white/20 group-hover:text-white/30 transition-colors duration-500">
-            <svg
-              viewBox="0 0 100 100"
-              className="w-24 h-24 animate-float-slow"
-            >
-              <path
-                d="M50 10 C35 30, 20 55, 50 80 C80 55, 65 30, 50 10Z"
-                fill="currentColor"
-              />
-            </svg>
+        {product.image ? (
+          <img 
+            src={getImageUrl(product.image)} 
+            alt={product.name} 
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-white/20 group-hover:text-white/30 transition-colors duration-500">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-24 h-24 animate-float-slow"
+              >
+                <path
+                  d="M50 10 C35 30, 20 55, 50 80 C80 55, 65 30, 50 10Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
+        )}
         {/* Category badge */}
         <div className="absolute top-3 left-3">
           <span

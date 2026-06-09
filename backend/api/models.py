@@ -14,7 +14,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50, choices=Category.choices)
     description = models.TextField()
     specifications = models.TextField(blank=True, help_text="Technical specifications (can use bullet points or free text)")
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    price = models.CharField(max_length=100, null=True, blank=True, help_text="Can be exact price or range (e.g., '35000-300000')")
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

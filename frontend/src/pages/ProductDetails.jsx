@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import SEOHead from '../components/SEOHead'
 import ProductCard from '../components/ProductCard'
-import { fetchProductBySlug, fetchProducts, formatPrice } from '../utils/api'
+import { fetchProductBySlug, fetchProducts, formatPrice, getImageUrl } from '../utils/api'
 
 const gradientStyles = {
   'product-gradient-1': 'from-ocean to-cyan',
@@ -110,7 +110,7 @@ export default function ProductDetails() {
             <div className="animate-fade-in-left">
               {product.image ? (
                 <div className="relative rounded-3xl overflow-hidden shadow-lg aspect-square max-h-[500px] flex items-center justify-center bg-white border border-gray-100">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-contain p-8" />
+                  <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-contain p-8" />
                   <div className="absolute top-4 left-4">
                     <span className={`px-4 py-1.5 rounded-full text-sm font-semibold ${badgeClass}`}>
                       {product.category_display || product.category}

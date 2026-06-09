@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/', include('api.urls')),
 ]
 
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files (uploaded product images, etc.)
+# On PythonAnywhere, also configure a Static Files mapping in the Web tab:
+#   URL: /media/   ->   Directory: /home/your_username/your_project/backend/media
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

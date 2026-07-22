@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 export default function SEOHead({
   title = 'Barhamthuri Aqua Solutions',
   description = 'Best water purifiers, industrial RO plants, iron removers and kitchen chimneys in Assam & North East India. Pure water, pure life.',
-  keywords = 'water purifier Assam, RO plant Guwahati, iron remover North East India, kitchen chimney Assam',
+  keywords = 'Water purifier Assam, Iron remover Assam, Aqua Guard Assam, RO plant Guwahati, best water filter North East India',
 }) {
   const fullTitle = title.includes('Barhamthuri')
     ? title

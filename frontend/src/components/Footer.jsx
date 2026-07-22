@@ -62,9 +62,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Providing safe, clean drinking water to every household and
-              industry in North East India since 2014. Trusted by 5000+ families
-              across Assam.
+              The leading provider of <strong>Water Purifiers in Assam</strong>, <strong>Iron Removers</strong>, <strong>Aqua Guards</strong>, and industrial RO systems since 2014. Trusted by 5000+ families for safe, clean drinking water across North East India.
             </p>
             {/* Social Links */}
             <div className="flex space-x-3">

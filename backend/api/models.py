@@ -120,3 +120,34 @@ class CoreValue(models.Model):
     def __str__(self):
         return self.title
 
+
+class Project(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    subtitle = models.CharField(max_length=100, help_text="e.g. Industrial, Community, Residential")
+    description = models.TextField()
+    cover_image = models.ImageField(upload_to='projects/covers/')
+    order = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', '-created_at']
+
+    def __str__(self):
+        return self.title
+
+
+class ProjectImage(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='projects/gallery/')
+    caption = models.CharField(max_length=255, blank=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Image for {self.project.title}"
+
+

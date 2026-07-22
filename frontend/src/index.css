@@ -496,6 +496,42 @@ body {
 }
 
 /* ========================================
+   GALLERY CARDS
+   ======================================== */
+.gallery-card {
+  position: relative;
+}
+
+.gallery-frame {
+  position: relative;
+  background: linear-gradient(135deg, #003B5C, #005580);
+  padding: 6px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-frame:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0, 59, 92, 0.25),
+              0 10px 25px rgba(0, 139, 139, 0.15);
+}
+
+.gallery-frame::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #008B8B, #00AAAA, #003B5C);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.gallery-frame:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
    SPECS TABLE
    ======================================== */
 .specs-table tr:nth-child(even) {

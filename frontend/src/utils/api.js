@@ -24,15 +24,21 @@ export const fetchMilestones = async () => {
 };
 
 export const fetchCoreValues = async () => {
-  try {
-    const res = await fetch(`${API_BASE_URL}/values/`);
-    if (!res.ok) throw new Error('Failed to fetch core values');
-    const data = await res.json();
-    return data.results || data;
-  } catch (error) {
-    console.error('API Error:', error);
-    return [];
-  }
+  const response = await fetch(`${API_BASE_URL}/values/`);
+  if (!response.ok) throw new Error('Failed to fetch core values');
+  return response.json();
+};
+
+export const fetchProjects = async () => {
+  const response = await fetch(`${API_BASE_URL}/projects/`);
+  if (!response.ok) throw new Error('Failed to fetch projects');
+  return response.json();
+};
+
+export const fetchProjectBySlug = async (slug) => {
+  const response = await fetch(`${API_BASE_URL}/projects/${slug}/`);
+  if (!response.ok) throw new Error('Failed to fetch project details');
+  return response.json();
 };
 
 export const fetchProducts = async (category = '') => {

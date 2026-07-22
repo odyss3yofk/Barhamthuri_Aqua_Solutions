@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue
+from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue, Project, ProjectImage
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -49,3 +49,22 @@ class CoreValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = CoreValue
         fields = '__all__'
+
+
+class ProjectImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectImage
+        fields = ['id', 'image', 'caption', 'order']
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    images = ProjectImageSerializer(many=True, read_only=True)
+    image_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Project
+        fields = ['id', 'title', 'slug', 'subtitle', 'description', 'cover_image', 'images', 'image_count', 'order', 'is_active']
+
+    def get_image_count(self, obj):
+        return obj.images.count()
+

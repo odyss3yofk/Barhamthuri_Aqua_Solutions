@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue
+from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue, Project, ProjectImage
 
 
 @admin.register(Product)
@@ -50,6 +50,22 @@ class MilestoneAdmin(admin.ModelAdmin):
 
 @admin.register(CoreValue)
 class CoreValueAdmin(admin.ModelAdmin):
-    list_display = ('title', 'icon', 'order')
+    list_display = ('title', 'order')
     list_editable = ('order',)
-    ordering = ('order',)
+    search_fields = ('title', 'description')
+    list_per_page = 25
+
+
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+    extra = 1
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'subtitle', 'is_active', 'order', 'created_at')
+    list_editable = ('is_active', 'order')
+    prepopulated_fields = {'slug': ('title',)}
+    inlines = [ProjectImageInline]
+    search_fields = ('title', 'description', 'subtitle')
+    list_filter = ('is_active', 'created_at')
+    list_per_page = 25

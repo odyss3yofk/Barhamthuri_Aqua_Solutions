@@ -1,9 +1,9 @@
 from rest_framework import viewsets, generics, filters, status
 from rest_framework.response import Response
-from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue
+from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue, Project
 from .serializers import (
     ProductSerializer, ServiceInquirySerializer, ContactInquirySerializer,
-    SiteSettingSerializer, MilestoneSerializer, CoreValueSerializer
+    SiteSettingSerializer, MilestoneSerializer, CoreValueSerializer, ProjectSerializer
 )
 
 
@@ -93,4 +93,13 @@ class CoreValueViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = CoreValue.objects.all()
     serializer_class = CoreValueSerializer
+
+
+class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Public read-only ViewSet for browsing past work projects.
+    """
+    queryset = Project.objects.filter(is_active=True)
+    serializer_class = ProjectSerializer
+    lookup_field = 'slug'
 

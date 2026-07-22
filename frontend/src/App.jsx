@@ -7,6 +7,8 @@ import Products from './pages/Products'
 import ProductDetails from './pages/ProductDetails'
 import ServicePortal from './pages/ServicePortal'
 import AboutContact from './pages/AboutContact'
+import OurWork from './pages/OurWork'
+import WorkDetail from './pages/WorkDetail'
 import NotFound from './pages/NotFound'
 
 function ScrollToTop() {
@@ -29,6 +31,8 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/products/:slug" element={<ProductDetails />} />
             <Route path="/service" element={<ServicePortal />} />
+            <Route path="/our-work" element={<OurWork />} />
+            <Route path="/our-work/:category" element={<WorkDetail />} />
             <Route path="/about" element={<AboutContact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

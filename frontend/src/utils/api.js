@@ -90,7 +90,7 @@ export const formatPrice = (price) => {
 };
 
 export const submitServiceInquiry = async (formData) => {
-  const response = await fetch(`${API_BASE_URL}/service-inquiries/`, {
+  const response = await fetch(`${API_BASE_URL}/service-inquiry/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

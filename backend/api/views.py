@@ -30,6 +30,9 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 class ServiceInquiryCreateView(generics.CreateAPIView):
     """
     POST-only endpoint for submitting service inquiries.
@@ -41,6 +44,32 @@ class ServiceInquiryCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        
+        # Send email notification
+        try:
+            inquiry = serializer.instance
+            subject = f"New Service Booking: {inquiry.get_service_type_display()} from {inquiry.customer_name}"
+            message = (
+                f"A new service booking has been received.\n\n"
+                f"Customer Name: {inquiry.customer_name}\n"
+                f"Phone Number: {inquiry.phone_number}\n"
+                f"Email: {inquiry.email or 'N/A'}\n"
+                f"Service Type: {inquiry.get_service_type_display()}\n"
+                f"Preferred Date: {inquiry.preferred_date or 'ASAP'}\n\n"
+                f"Message:\n{inquiry.message}\n"
+            )
+            recipient_list = ['customerservice@barhamthuriaquasolutions.com', 'barhamthuriaquasolutions@gmail.com']
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                recipient_list,
+                fail_silently=True,
+            )
+        except Exception as e:
+            # We don't want an email failure to prevent the user from seeing a success message
+            print(f"Failed to send email: {e}")
+
         return Response(
             {
                 'message': 'Service inquiry submitted successfully. We will contact you soon!',

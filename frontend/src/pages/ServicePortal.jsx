@@ -11,24 +11,28 @@ const serviceTypes = [
 
 const serviceCards = [
   {
+    type: 'repair',
     icon: '🔧',
     title: 'Repair Service',
     desc: 'Quick diagnosis and repair for all brands of water purifiers and kitchen chimneys. Same-day service in Guwahati.',
     color: 'from-blue-500/10 to-ocean/10',
   },
   {
+    type: 'installation',
     icon: '⚙️',
     title: 'Installation',
     desc: 'Professional installation by certified technicians with proper plumbing, water quality testing, and user training.',
     color: 'from-cyan/10 to-cyan-light/10',
   },
   {
+    type: 'checkup',
     icon: '📋',
     title: 'AMC Plans',
     desc: 'Annual Maintenance Contracts with scheduled visits, free filter replacements, and priority support.',
     color: 'from-purple-500/10 to-blue-500/10',
   },
   {
+    type: 'emergency',
     icon: '🚨',
     title: 'Emergency',
     desc: '24/7 emergency service for water purifier breakdowns. Response within 4 hours in Guwahati metro area.',
@@ -48,6 +52,17 @@ export default function ServicePortal() {
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+
+  const handleCardClick = (type) => {
+    setFormData((prev) => ({ ...prev, serviceType: type }))
+    if (errors.serviceType) {
+      setErrors((prev) => ({ ...prev, serviceType: '' }))
+    }
+    const formElement = document.getElementById('booking-form')
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   const validate = () => {
     const newErrors = {}
@@ -146,7 +161,8 @@ export default function ServicePortal() {
             {serviceCards.map((card, i) => (
               <div
                 key={card.title}
-                className={`p-7 rounded-2xl bg-gradient-to-br ${card.color} border border-gray-100 card-hover text-center animate-fade-in-up`}
+                onClick={() => handleCardClick(card.type)}
+                className={`p-7 rounded-2xl bg-gradient-to-br ${card.color} border border-gray-100 card-hover text-center animate-fade-in-up cursor-pointer`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <span className="text-4xl block mb-4">{card.icon}</span>
@@ -163,7 +179,7 @@ export default function ServicePortal() {
       </section>
 
       {/* Booking Form */}
-      <section className="py-12 md:py-20 bg-gray-50">
+      <section id="booking-form" className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-cyan font-semibold text-sm tracking-widest uppercase">

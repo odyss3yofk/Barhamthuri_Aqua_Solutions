@@ -1,5 +1,7 @@
 from rest_framework import viewsets, generics, filters, status
 from rest_framework.response import Response
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milestone, CoreValue, Project
 from .serializers import (
     ProductSerializer, ServiceInquirySerializer, ContactInquirySerializer,
@@ -74,6 +76,10 @@ class SiteSettingRetrieveView(generics.RetrieveAPIView):
     """
     serializer_class = SiteSettingSerializer
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     def get_object(self):
         obj, created = SiteSetting.objects.get_or_create(pk=1)
         return obj
@@ -86,6 +92,10 @@ class MilestoneViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Milestone.objects.all()
     serializer_class = MilestoneSerializer
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class CoreValueViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -94,12 +104,16 @@ class CoreValueViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CoreValue.objects.all()
     serializer_class = CoreValueSerializer
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Public read-only ViewSet for browsing past work projects.
     """
-    queryset = Project.objects.filter(is_active=True)
+    queryset = Project.objects.filter(is_active=True).prefetch_related('images')
     serializer_class = ProjectSerializer
     lookup_field = 'slug'
 

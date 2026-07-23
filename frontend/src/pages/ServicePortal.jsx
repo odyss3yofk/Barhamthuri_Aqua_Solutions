@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import SEOHead from '../components/SEOHead'
+import { submitServiceInquiry } from '../utils/api'
 
 const serviceTypes = [
   { value: '', label: 'Select Service Type' },
@@ -52,6 +53,7 @@ export default function ServicePortal() {
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const handleCardClick = (type) => {
     setFormData((prev) => ({ ...prev, serviceType: type }))
@@ -85,19 +87,24 @@ export default function ServicePortal() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitError('')
     const newErrors = validate()
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       return
     }
     setSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false)
+    
+    try {
+      await submitServiceInquiry(formData)
       setSubmitted(true)
-    }, 1500)
+    } catch (err) {
+      setSubmitError(err.message || 'Failed to submit booking. Please try again or call us.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const resetForm = () => {
@@ -227,6 +234,12 @@ export default function ServicePortal() {
               className="bg-white rounded-3xl shadow-xl p-8 md:p-12 space-y-6"
               noValidate
             >
+              {submitError && (
+                <div className="bg-red-50 text-red-500 p-4 rounded-xl text-sm font-medium mb-6">
+                  {submitError}
+                </div>
+              )}
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name */}
                 <div>

@@ -88,3 +88,25 @@ export const formatPrice = (price) => {
     maximumFractionDigits: 0,
   }).format(numPrice);
 };
+
+export const submitServiceInquiry = async (formData) => {
+  const response = await fetch(`${API_BASE_URL}/service-inquiries/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      customer_name: formData.name,
+      phone_number: formData.phone,
+      email: formData.email,
+      service_type: formData.serviceType.toUpperCase(),
+      message: formData.message || "No additional message.",
+      preferred_date: formData.preferredDate
+    }),
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Failed to submit inquiry');
+  }
+  return response.json();
+};

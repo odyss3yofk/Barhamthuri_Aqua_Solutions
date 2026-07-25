@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import SEOHead from '../components/SEOHead'
 import ProductCard from '../components/ProductCard'
+import ScrollSequence from '../components/ScrollSequence'
 import { fetchSettings, fetchCoreValues, fetchProducts } from '../utils/api'
 
 /* ---- Animated Counter Hook ---- */
@@ -191,6 +192,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ============ SCROLL SEQUENCE SECTION ============ */}
+      <ScrollSequence />
 
       {/* ============ STATS SECTION ============ */}
       <section className="py-16 md:py-20 bg-white relative">

@@ -3,15 +3,31 @@
 @tailwind utilities;
 
 /* ========================================
-   BARHAMTHURI AQUA SOLUTIONS - Custom CSS
-   Premium Water-Themed Animations & Effects
+   BARHAMTHURI AQUA SOLUTIONS
+   Dark Cinematic Design System v2
    ======================================== */
 
+/* --- CSS VARIABLES --- */
+:root {
+  --void: #070B0F;
+  --surface: #0D1520;
+  --elevated: #152030;
+  --border: rgba(255,255,255,0.07);
+  --border-accent: rgba(45,212,191,0.25);
+  --accent: #2DD4BF;
+  --accent-dim: #14B8A6;
+  --accent-bright: #5EEAD4;
+  --sky: #38BDF8;
+  --text-1: #F8FAFC;
+  --text-2: #94A3B8;
+  --text-3: #475569;
+}
+
 /* --- BASE STYLES --- */
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -20,310 +36,152 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: #333333;
+  background-color: var(--void);
+  color: var(--text-1);
   overflow-x: hidden;
-  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* --- SCROLLBAR --- */
-::-webkit-scrollbar {
-  width: 8px;
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+.display-font { font-family: 'Outfit', system-ui, sans-serif; }
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent) 50%, var(--sky) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-  background: #003B5C;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #005580;
+
+.text-gradient-subtle {
+  background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* ========================================
-   WATER WAVE ANIMATION - Hero Background
+   KEYFRAME ANIMATIONS
    ======================================== */
-@keyframes waveShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50%       { transform: translateY(-16px); }
 }
 
 @keyframes floatSlow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-}
-
-@keyframes ripple {
-  0% { transform: scale(0); opacity: 0.6; }
-  100% { transform: scale(4); opacity: 0; }
-}
-
-@keyframes wave1 {
-  0% { d: path("M0,160 C320,300,420,240,640,160 C860,80,960,160,1280,200 L1280,320 L0,320 Z"); }
-  50% { d: path("M0,200 C320,100,420,280,640,200 C860,120,960,200,1280,160 L1280,320 L0,320 Z"); }
-  100% { d: path("M0,160 C320,300,420,240,640,160 C860,80,960,160,1280,200 L1280,320 L0,320 Z"); }
-}
-
-@keyframes wave2 {
-  0% { d: path("M0,200 C320,120,420,280,640,200 C860,120,960,220,1280,180 L1280,320 L0,320 Z"); }
-  50% { d: path("M0,180 C320,280,420,120,640,220 C860,180,960,120,1280,200 L1280,320 L0,320 Z"); }
-  100% { d: path("M0,200 C320,120,420,280,640,200 C860,120,960,220,1280,180 L1280,320 L0,320 Z"); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes bubbleRise {
-  0% { transform: translateY(100%) scale(0.4); opacity: 0; }
-  20% { opacity: 0.6; }
-  100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-40px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  50%       { transform: translateY(-10px) rotate(2deg); }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(0, 139, 139, 0.4); }
-  50% { box-shadow: 0 0 20px rgba(0, 139, 139, 0.8); }
+  0%, 100% { box-shadow: 0 0 10px rgba(45,212,191,0.3); }
+  50%       { box-shadow: 0 0 30px rgba(45,212,191,0.6), 0 0 60px rgba(45,212,191,0.2); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(45,212,191,0.2); }
+  50%       { border-color: rgba(45,212,191,0.6); }
 }
 
 @keyframes countUp {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ========================================
-   HERO SECTION STYLES
-   ======================================== */
-.hero-gradient {
-  background: linear-gradient(-45deg, #002A42, #003B5C, #005580, #008B8B, #00AAAA, #003B5C);
-  background-size: 400% 400%;
-  animation: waveShift 15s ease infinite;
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(4); opacity: 0; }
 }
 
-.hero-text-clip {
-  background: linear-gradient(135deg, #ffffff 0%, #b0e0e6 30%, #ffffff 50%, #00AAAA 70%, #ffffff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
+@keyframes bubbleRise {
+  0%   { transform: translateY(100%) scale(0.4); opacity: 0; }
+  20%  { opacity: 0.4; }
+  100% { transform: translateY(-100vh) scale(1); opacity: 0; }
 }
 
-/* Bubbles */
-.bubble {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  animation: bubbleRise linear infinite;
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ========================================
-   LIQUID FILL BUTTON
-   ======================================== */
-.btn-liquid {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: color 0.4s ease, box-shadow 0.3s ease;
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.btn-liquid::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: linear-gradient(135deg, #008B8B, #00AAAA);
-  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: -1;
-  border-radius: inherit;
+@keyframes waveShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.btn-liquid:hover::before {
-  height: 100%;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.btn-liquid:hover {
-  color: white;
-  box-shadow: 0 8px 25px rgba(0, 139, 139, 0.4);
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-.btn-liquid-white {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: color 0.4s ease, box-shadow 0.3s ease;
-}
-
-.btn-liquid-white::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: white;
-  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: -1;
-  border-radius: inherit;
-}
-
-.btn-liquid-white:hover::before {
-  height: 100%;
-}
-
-.btn-liquid-white:hover {
-  color: #003B5C !important;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-}
-
-.btn-ocean {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: color 0.4s ease, box-shadow 0.3s ease;
-}
-
-.btn-ocean::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: linear-gradient(135deg, #003B5C, #005580);
-  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: -1;
-  border-radius: inherit;
-}
-
-.btn-ocean:hover::before {
-  height: 100%;
-}
-
-.btn-ocean:hover {
-  color: white;
-  box-shadow: 0 8px 25px rgba(0, 59, 92, 0.4);
-}
-
-/* ========================================
-   WATER RIPPLE CLICK EFFECT
-   ======================================== */
-.ripple-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.ripple-effect .ripple-circle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(0, 139, 139, 0.3);
-  transform: scale(0);
-  animation: ripple 0.6s linear;
-  pointer-events: none;
-}
-
-/* ========================================
-   GLASSMORPHISM
-   ======================================== */
-.glass {
-  background: rgba(0, 59, 92, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-light {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* ========================================
-   CARD HOVER EFFECTS
-   ======================================== */
-.card-hover {
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-              box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 59, 92, 0.15), 0 8px 20px rgba(0, 0, 0, 0.08);
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ========================================
    ANIMATION UTILITY CLASSES
    ======================================== */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease forwards;
-}
+.animate-fade-up    { animation: fadeUp 0.7s ease forwards; }
+.animate-fade-in    { animation: fadeIn 0.6s ease forwards; }
+.animate-float      { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: floatSlow 8s ease-in-out infinite; }
+.animate-scale-in   { animation: scaleIn 0.5s ease forwards; }
+.animate-slide-down { animation: slideDown 0.4s ease forwards; }
+.animate-shimmer    { animation: shimmer 3s linear infinite; }
 
-.animate-fade-in-left {
-  animation: fadeInLeft 0.8s ease forwards;
-}
+/* Legacy compat */
+.animate-fade-in-up    { animation: fadeInUp 0.8s ease forwards; }
+.animate-fade-in-left  { animation: fadeInLeft 0.8s ease forwards; }
+.animate-fade-in-right { animation: fadeInRight 0.8s ease forwards; }
+.animate-scale-in      { animation: scaleIn 0.6s ease forwards; }
 
-.animate-fade-in-right {
-  animation: fadeInRight 0.8s ease forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease forwards;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.5s ease forwards;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: floatSlow 8s ease-in-out infinite;
-}
-
-/* Staggered animation delays */
+/* Stagger delays */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
@@ -333,215 +191,324 @@ body {
 .delay-700 { animation-delay: 0.7s; }
 .delay-800 { animation-delay: 0.8s; }
 
-/* Initial state for animated elements */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+/* Scroll triggered */
+.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+/* ========================================
+   GLASSMORPHISM
+   ======================================== */
+.glass-dark {
+  background: rgba(13, 21, 32, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
 }
 
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
+.glass-card {
+  background: rgba(21, 32, 48, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Legacy */
+.glass {
+  background: rgba(0, 59, 92, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ========================================
-   DIAGONAL CUT SECTION
+   BUTTONS
    ======================================== */
-.diagonal-top {
-  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
-}
-
-.diagonal-bottom {
-  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-}
-
-.diagonal-both {
-  clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
-}
-
-/* ========================================
-   WATER DROP IMAGE MASK
-   ======================================== */
-.water-drop-clip {
-  clip-path: ellipse(45% 48% at 50% 52%);
-}
-
-/* ========================================
-   CATEGORY FILTER TABS
-   ======================================== */
-.tab-underline {
+.btn-primary {
   position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--void);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.tab-underline::after {
+.btn-primary:hover {
+  background: var(--accent-bright);
+  box-shadow: 0 0 30px rgba(45,212,191,0.4), 0 4px 16px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-1);
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(45,212,191,0.05);
+}
+
+/* Legacy buttons */
+.btn-liquid {
+  position: relative; overflow: hidden; z-index: 1;
+  transition: color 0.4s ease, box-shadow 0.3s ease;
+}
+.btn-liquid::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 0%;
+  background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1; border-radius: inherit;
+}
+.btn-liquid:hover::before { height: 100%; }
+.btn-liquid:hover { color: #070B0F; box-shadow: 0 8px 25px rgba(45,212,191,0.35); }
+
+.btn-liquid-white {
+  position: relative; overflow: hidden; z-index: 1;
+  transition: color 0.4s ease, box-shadow 0.3s ease;
+}
+.btn-liquid-white::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 0%;
+  background: white;
+  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1; border-radius: inherit;
+}
+.btn-liquid-white:hover::before { height: 100%; }
+.btn-liquid-white:hover { color: #070B0F !important; box-shadow: 0 8px 25px rgba(255,255,255,0.2); }
+
+.btn-ocean {
+  position: relative; overflow: hidden; z-index: 1;
+  transition: color 0.4s ease, box-shadow 0.3s ease;
+}
+.btn-ocean::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 0%;
+  background: linear-gradient(135deg, #003B5C, #005580);
+  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1; border-radius: inherit;
+}
+.btn-ocean:hover::before { height: 100%; }
+.btn-ocean:hover { color: white; box-shadow: 0 8px 25px rgba(0,59,92,0.4); }
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+.card-dark {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-dark:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(45,212,191,0.2);
+  border-color: rgba(45,212,191,0.2);
+}
+
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(45,212,191,0.15);
+}
+
+/* ========================================
+   SECTION & PAGE HERO
+   ======================================== */
+.page-hero {
+  position: relative;
+  padding-top: 7rem;
+  padding-bottom: 4rem;
+  background: linear-gradient(180deg, #0D1520 0%, var(--void) 100%);
+  overflow: hidden;
+}
+
+.page-hero::before {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0%;
-  height: 3px;
-  background: linear-gradient(90deg, #008B8B, #00AAAA);
-  border-radius: 2px;
-  transition: width 0.3s ease;
+  inset: 0;
+  background-image: linear-gradient(rgba(45,212,191,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(45,212,191,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
 }
 
-.tab-underline.active::after,
-.tab-underline:hover::after {
-  width: 100%;
+/* Legacy hero */
+.hero-gradient {
+  background: linear-gradient(-45deg, #002A42, #003B5C, #005580, #008B8B, #00AAAA, #003B5C);
+  background-size: 400% 400%;
+  animation: waveShift 15s ease infinite;
+}
+
+.hero-text-clip {
+  background: linear-gradient(135deg, #5EEAD4 0%, #2DD4BF 40%, #38BDF8 70%, #5EEAD4 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
 }
 
 /* ========================================
-   FORM STYLES
+   FORMS
    ======================================== */
 .form-input {
-  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white
-         transition-all duration-300 outline-none font-sans;
+  @apply w-full px-4 py-3 rounded-lg border-2 transition-all duration-300 outline-none font-sans;
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-1);
 }
-
+.form-input::placeholder { color: var(--text-3); }
 .form-input:focus {
-  @apply border-cyan bg-white shadow-lg;
-  box-shadow: 0 0 0 3px rgba(0, 139, 139, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45,212,191,0.1);
 }
-
 .form-label {
-  @apply block text-sm font-semibold text-ocean mb-2;
+  @apply block text-sm font-semibold mb-2;
+  color: var(--text-2);
 }
 
 /* ========================================
-   PAGE TRANSITION
+   GRID & BACKGROUNDS
    ======================================== */
-.page-enter {
-  animation: fadeInUp 0.5s ease forwards;
+.grid-bg {
+  background-image: linear-gradient(rgba(45,212,191,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(45,212,191,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.noise-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 /* ========================================
-   GRADIENT TEXT
+   DIVIDER / ACCENT LINE
    ======================================== */
-.gradient-text {
-  background: linear-gradient(135deg, #003B5C, #008B8B);
+.accent-line {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--accent), var(--sky));
+  margin-bottom: 1rem;
+}
+
+/* ========================================
+   GALLERY
+   ======================================== */
+.gallery-card { position: relative; }
+.gallery-frame {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.3s ease;
+}
+.gallery-frame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(45,212,191,0.25);
+  border-color: rgba(45,212,191,0.25);
+}
+
+/* ========================================
+   PRODUCT GRADIENTS (fallbacks)
+   ======================================== */
+.product-gradient-1 { background: linear-gradient(135deg, #0D1520 0%, #152030 100%); }
+.product-gradient-2 { background: linear-gradient(135deg, #0A1B1F 0%, #0D2E30 100%); }
+.product-gradient-3 { background: linear-gradient(135deg, #0D1520 0%, #0F1F38 100%); }
+.product-gradient-4 { background: linear-gradient(135deg, #152030 0%, #0D1520 100%); }
+
+/* ========================================
+   SPECS TABLE
+   ======================================== */
+.specs-table tr:nth-child(even) { background-color: rgba(45,212,191,0.03); }
+.specs-table tr { transition: background-color 0.2s ease; }
+.specs-table tr:hover { background-color: rgba(45,212,191,0.06); }
+
+/* ========================================
+   MISC EFFECTS
+   ======================================== */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(45,212,191,0.06);
+  border: 1px solid rgba(45,212,191,0.1);
+  animation: bubbleRise linear infinite;
+}
+
+.gradient-text { 
+  background: linear-gradient(135deg, #2DD4BF, #38BDF8);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* ========================================
-   PARALLAX CONTAINER
-   ======================================== */
-.parallax-container {
-  perspective: 1px;
-  overflow-y: auto;
-  overflow-x: hidden;
+.tab-underline { position: relative; }
+.tab-underline::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0%; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--sky));
+  border-radius: 1px; transition: width 0.3s ease;
 }
+.tab-underline.active::after, .tab-underline:hover::after { width: 100%; }
 
-.parallax-slow {
-  transform: translateZ(-1px) scale(2);
-}
+.diagonal-top   { clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%); }
+.diagonal-bottom { clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); }
+.diagonal-both  { clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%); }
+
+.water-drop-clip { clip-path: ellipse(45% 48% at 50% 52%); }
+
+.counter-value { display: inline-block; animation: countUp 0.8s ease forwards; }
 
 /* ========================================
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE
    ======================================== */
 @media (max-width: 768px) {
-  .hero-text-clip {
-    font-size: 2.5rem !important;
-  }
+  .hero-text-clip { font-size: 2.5rem !important; }
 }
-
 @media (max-width: 480px) {
-  .hero-text-clip {
-    font-size: 2rem !important;
-  }
-}
-
-/* ========================================
-   SECTION SEPARATOR WAVE SVG
-   ======================================== */
-.wave-separator {
-  position: relative;
-}
-
-.wave-separator::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: white;
-  clip-path: ellipse(55% 100% at 50% 100%);
-}
-
-/* ========================================
-   COUNTER ANIMATION
-   ======================================== */
-.counter-value {
-  display: inline-block;
-  animation: countUp 0.8s ease forwards;
-}
-
-/* ========================================
-   PRODUCT GRADIENT PLACEHOLDERS
-   ======================================== */
-.product-gradient-1 {
-  background: linear-gradient(135deg, #003B5C 0%, #008B8B 100%);
-}
-.product-gradient-2 {
-  background: linear-gradient(135deg, #005580 0%, #00AAAA 100%);
-}
-.product-gradient-3 {
-  background: linear-gradient(135deg, #002A42 0%, #006B6B 100%);
-}
-.product-gradient-4 {
-  background: linear-gradient(135deg, #008B8B 0%, #003B5C 100%);
-}
-
-/* ========================================
-   GALLERY CARDS
-   ======================================== */
-.gallery-card {
-  position: relative;
-}
-
-.gallery-frame {
-  position: relative;
-  background: linear-gradient(135deg, #003B5C, #005580);
-  padding: 6px;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.gallery-frame:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 60px rgba(0, 59, 92, 0.25),
-              0 10px 25px rgba(0, 139, 139, 0.15);
-}
-
-.gallery-frame::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #008B8B, #00AAAA, #003B5C);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.gallery-frame:hover::before {
-  opacity: 1;
-}
-
-/* ========================================
-   SPECS TABLE
-   ======================================== */
-.specs-table tr:nth-child(even) {
-  background-color: rgba(0, 139, 139, 0.04);
-}
-
-.specs-table tr {
-  transition: background-color 0.2s ease;
-}
-
-.specs-table tr:hover {
-  background-color: rgba(0, 139, 139, 0.08);
+  .hero-text-clip { font-size: 2rem !important; }
 }

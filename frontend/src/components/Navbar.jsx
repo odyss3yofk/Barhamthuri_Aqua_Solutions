@@ -6,7 +6,7 @@ const navLinks = [
   { to: '/products', label: 'Products' },
   { to: '/service', label: 'Service' },
   { to: '/our-work', label: 'Our Work' },
-  { to: '/about', label: 'About & Contact' },
+  { to: '/about', label: 'About' },
 ]
 
 export default function Navbar() {
@@ -14,34 +14,25 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on route change
   const handleLinkClick = () => setIsOpen(false)
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'glass shadow-lg shadow-ocean/10'
-          : 'bg-ocean/60 backdrop-blur-md'
+        scrolled ? 'glass-dark' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
+
           {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center space-x-3 group"
-            onClick={handleLinkClick}
-          >
-            {/* Rhino water drop logo */}
-            <div className="relative w-10 h-10 lg:w-12 lg:h-12 flex-shrink-0">
+          <Link to="/" className="flex items-center space-x-3 group" onClick={handleLinkClick}>
+            <div className="relative w-9 h-9 lg:w-11 lg:h-11 flex-shrink-0">
               <img
                 src="/logo.png"
                 alt="Barhamthuri Aqua Solutions Logo"
@@ -49,16 +40,16 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-white font-bold text-lg lg:text-xl leading-tight tracking-tight">
+              <span className="text-white font-bold text-base lg:text-lg leading-tight tracking-tight display-font">
                 Barhamthuri
               </span>
-              <span className="text-cyan-light text-[10px] lg:text-xs font-medium tracking-widest uppercase">
+              <span className="text-accent text-[9px] lg:text-[10px] font-semibold tracking-[0.2em] uppercase">
                 Aqua Solutions
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <NavLink
@@ -68,8 +59,8 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
                     isActive
-                      ? 'text-white bg-white/15'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'text-accent bg-accent/10'
+                      : 'text-white/70 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
@@ -77,7 +68,7 @@ export default function Navbar() {
                   <>
                     {link.label}
                     {isActive && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-cyan-light rounded-full" />
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-accent rounded-full" />
                     )}
                   </>
                 )}
@@ -85,7 +76,7 @@ export default function Navbar() {
             ))}
             <Link
               to="/service"
-              className="ml-4 px-5 py-2 bg-cyan text-white text-sm font-semibold rounded-lg btn-liquid hover:shadow-lg transition-all duration-300"
+              className="ml-4 btn-primary text-sm py-2 px-5"
             >
               Book Service
             </Link>
@@ -97,22 +88,10 @@ export default function Navbar() {
             className="lg:hidden relative w-10 h-10 flex items-center justify-center text-white focus:outline-none"
             aria-label="Toggle menu"
           >
-            <div className="relative w-6 h-5">
-              <span
-                className={`absolute left-0 h-0.5 w-6 bg-white rounded transform transition-all duration-300 ${
-                  isOpen ? 'top-2 rotate-45' : 'top-0'
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-2 h-0.5 w-6 bg-white rounded transition-all duration-200 ${
-                  isOpen ? 'opacity-0 translate-x-3' : 'opacity-100'
-                }`}
-              />
-              <span
-                className={`absolute left-0 h-0.5 w-6 bg-white rounded transform transition-all duration-300 ${
-                  isOpen ? 'top-2 -rotate-45' : 'top-4'
-                }`}
-              />
+            <div className="relative w-5 h-4">
+              <span className={`absolute left-0 h-0.5 w-5 bg-white rounded transform transition-all duration-300 ${isOpen ? 'top-2 rotate-45' : 'top-0'}`} />
+              <span className={`absolute left-0 top-2 h-0.5 w-5 bg-white rounded transition-all duration-200 ${isOpen ? 'opacity-0 scale-x-0' : 'opacity-100'}`} />
+              <span className={`absolute left-0 h-0.5 w-5 bg-white rounded transform transition-all duration-300 ${isOpen ? 'top-2 -rotate-45' : 'top-4'}`} />
             </div>
           </button>
         </div>
@@ -120,10 +99,10 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            isOpen ? 'max-h-96 opacity-100 pb-6' : 'max-h-0 opacity-0'
+            isOpen ? 'max-h-screen opacity-100 pb-6' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="flex flex-col space-y-1 pt-2">
+          <div className="mt-2 rounded-2xl bg-surface border border-white/10 p-4 flex flex-col space-y-1">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
@@ -131,10 +110,10 @@ export default function Navbar() {
                 end={link.to === '/'}
                 onClick={handleLinkClick}
                 className={({ isActive }) =>
-                  `px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  `px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                     isActive
-                      ? 'text-white bg-white/15 border-l-4 border-cyan-light'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'text-accent bg-accent/10 border-l-2 border-accent'
+                      : 'text-white/70 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
@@ -144,7 +123,7 @@ export default function Navbar() {
             <Link
               to="/service"
               onClick={handleLinkClick}
-              className="mx-4 mt-2 px-5 py-3 bg-cyan text-white text-sm font-semibold rounded-lg text-center btn-liquid"
+              className="mt-2 btn-primary text-sm text-center"
             >
               Book Service
             </Link>

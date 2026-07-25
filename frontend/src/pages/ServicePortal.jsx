@@ -16,14 +16,14 @@ const serviceCards = [
     icon: '🔧',
     title: 'Repair Service',
     desc: 'Quick diagnosis and repair for all brands of water purifiers and kitchen chimneys. Same-day service in Guwahati.',
-    color: 'from-blue-500/10 to-ocean/10',
+    color: 'from-blue-500/10 to-sky/10',
   },
   {
     type: 'installation',
     icon: '⚙️',
     title: 'Installation',
     desc: 'Professional installation by certified technicians with proper plumbing, water quality testing, and user training.',
-    color: 'from-cyan/10 to-cyan-light/10',
+    color: 'from-accent/10 to-accent-bright/10',
   },
   {
     type: 'checkup',
@@ -124,7 +124,7 @@ export default function ServicePortal() {
   const today = new Date().toISOString().split('T')[0]
 
   return (
-    <>
+    <div className="bg-void min-h-screen">
       <SEOHead
         title="Book Service — Installation, Repair & AMC"
         description="Book water purifier installation, repair, maintenance or emergency service in Assam. Expert technicians, same-day service in Guwahati. Call now!"
@@ -132,51 +132,44 @@ export default function ServicePortal() {
       />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 bg-gradient-to-br from-ocean via-ocean-light to-cyan overflow-hidden">
-        <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-white/5 animate-float" />
-        <div className="absolute bottom-10 left-20 w-24 h-24 rounded-full bg-cyan-light/10 animate-float-slow" />
-
-        <div className="absolute bottom-0 left-0 w-full">
-          <svg viewBox="0 0 1440 100" className="w-full h-12 md:h-16" preserveAspectRatio="none">
-            <path d="M0,60 C480,100,960,20,1440,60 L1440,100 L0,100 Z" fill="white" />
-          </svg>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Service Portal
+      <section className="page-hero relative overflow-hidden">
+        <div className="absolute inset-0 grid-bg opacity-30"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-36 md:pb-20 text-center">
+          <span className="text-accent text-xs font-semibold tracking-widest uppercase">Service Portal</span>
+          <h1 className="display-font text-4xl md:text-5xl lg:text-6xl font-bold text-ink-1 mt-4 mb-4">
+            Expert Maintenance & Repair
           </h1>
-          <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
-            Expert maintenance and repair — just a booking away. Our certified
-            technicians are ready to help.
+          <p className="text-ink-2 text-lg md:text-xl max-w-2xl mx-auto">
+            Just a booking away. Our certified technicians are ready to help.
           </p>
         </div>
       </section>
 
       {/* Service Cards */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="text-cyan font-semibold text-sm tracking-widest uppercase">
+            <span className="text-accent text-xs font-semibold tracking-widest uppercase">
               What We Offer
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-charcoal mt-3">
+            <h2 className="display-font text-3xl md:text-4xl font-bold text-ink-1 mt-3">
               Our Services
             </h2>
+            <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full accent-line"></div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviceCards.map((card, i) => (
               <div
                 key={card.title}
                 onClick={() => handleCardClick(card.type)}
-                className={`p-7 rounded-2xl bg-gradient-to-br ${card.color} border border-gray-100 card-hover text-center animate-fade-in-up cursor-pointer`}
+                className={`p-7 rounded-2xl bg-surface border border-white/10 text-center animate-fade-in cursor-pointer transition-all duration-300 hover:border-accent hover:shadow-[0_0_15px_rgba(45,212,191,0.2)] bg-gradient-to-br ${card.color}`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <span className="text-4xl block mb-4">{card.icon}</span>
-                <h3 className="font-bold text-lg text-charcoal mb-2">
+                <h3 className="font-bold text-lg text-ink-1 mb-2">
                   {card.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-3 text-sm leading-relaxed">
                   {card.desc}
                 </p>
               </div>
@@ -186,16 +179,17 @@ export default function ServicePortal() {
       </section>
 
       {/* Booking Form */}
-      <section id="booking-form" className="py-12 md:py-20 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="booking-form" className="py-12 md:py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-void to-surface opacity-50"></div>
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="text-cyan font-semibold text-sm tracking-widest uppercase">
+            <span className="text-accent text-xs font-semibold tracking-widest uppercase">
               Get Started
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-charcoal mt-3 mb-3">
+            <h2 className="display-font text-3xl md:text-4xl font-bold text-ink-1 mt-3 mb-3">
               Book a Service
             </h2>
-            <p className="text-gray-500 max-w-lg mx-auto">
+            <p className="text-ink-2 max-w-lg mx-auto">
               Fill in the details below and our team will get back to you within
               2 hours during business hours.
             </p>
@@ -203,26 +197,26 @@ export default function ServicePortal() {
 
           {submitted ? (
             /* Success State */
-            <div className="bg-white rounded-3xl shadow-xl p-10 md:p-14 text-center animate-scale-in">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
-                <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-surface border border-accent/20 rounded-3xl p-10 md:p-14 text-center animate-scale-in">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center border border-accent/30">
+                <svg className="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-charcoal mb-3">
+              <h3 className="text-2xl font-bold text-ink-1 mb-3">
                 Booking Submitted! 🎉
               </h3>
-              <p className="text-gray-500 mb-2">
-                Thank you, <strong>{formData.name}</strong>! Your service request
+              <p className="text-ink-2 mb-2">
+                Thank you, <strong className="text-ink-1">{formData.name}</strong>! Your service request
                 has been received.
               </p>
-              <p className="text-gray-400 text-sm mb-8">
-                Our team will contact you at <strong>{formData.phone}</strong>{' '}
+              <p className="text-ink-3 text-sm mb-8">
+                Our team will contact you at <strong className="text-ink-2">{formData.phone}</strong>{' '}
                 within 2 hours to confirm the appointment.
               </p>
               <button
                 onClick={resetForm}
-                className="px-8 py-3 bg-ocean text-white font-semibold rounded-xl btn-liquid"
+                className="px-8 py-3 btn-primary w-full md:w-auto"
               >
                 Book Another Service
               </button>
@@ -231,11 +225,11 @@ export default function ServicePortal() {
             /* Form */
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-3xl shadow-xl p-8 md:p-12 space-y-6"
+              className="bg-surface border border-white/10 rounded-3xl p-8 md:p-12 space-y-6"
               noValidate
             >
               {submitError && (
-                <div className="bg-red-50 text-red-500 p-4 rounded-xl text-sm font-medium mb-6">
+                <div className="bg-red-900/20 border border-red-500/30 text-red-400 p-4 rounded-xl text-sm font-medium mb-6">
                   {submitError}
                 </div>
               )}
@@ -243,7 +237,7 @@ export default function ServicePortal() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name */}
                 <div>
-                  <label htmlFor="name" className="form-label">
+                  <label htmlFor="name" className="form-label text-ink-2 block mb-2 text-sm">
                     Full Name <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -252,7 +246,7 @@ export default function ServicePortal() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`form-input ${errors.name ? 'border-red-400' : ''}`}
+                    className={`form-input w-full bg-void border ${errors.name ? 'border-red-400' : 'border-white/10'} rounded-xl px-4 py-3 text-ink-1 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all`}
                     placeholder="Your full name"
                   />
                   {errors.name && (
@@ -262,7 +256,7 @@ export default function ServicePortal() {
 
                 {/* Phone */}
                 <div>
-                  <label htmlFor="phone" className="form-label">
+                  <label htmlFor="phone" className="form-label text-ink-2 block mb-2 text-sm">
                     Phone Number <span className="text-red-400">*</span>
                   </label>
                   <input
@@ -271,7 +265,7 @@ export default function ServicePortal() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`form-input ${errors.phone ? 'border-red-400' : ''}`}
+                    className={`form-input w-full bg-void border ${errors.phone ? 'border-red-400' : 'border-white/10'} rounded-xl px-4 py-3 text-ink-1 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all`}
                     placeholder="10-digit mobile number"
                     maxLength={10}
                   />
@@ -284,7 +278,7 @@ export default function ServicePortal() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Email */}
                 <div>
-                  <label htmlFor="email" className="form-label">
+                  <label htmlFor="email" className="form-label text-ink-2 block mb-2 text-sm">
                     Email (Optional)
                   </label>
                   <input
@@ -293,7 +287,7 @@ export default function ServicePortal() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`form-input ${errors.email ? 'border-red-400' : ''}`}
+                    className={`form-input w-full bg-void border ${errors.email ? 'border-red-400' : 'border-white/10'} rounded-xl px-4 py-3 text-ink-1 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all`}
                     placeholder="your@email.com"
                   />
                   {errors.email && (
@@ -303,7 +297,7 @@ export default function ServicePortal() {
 
                 {/* Service Type */}
                 <div>
-                  <label htmlFor="serviceType" className="form-label">
+                  <label htmlFor="serviceType" className="form-label text-ink-2 block mb-2 text-sm">
                     Service Type <span className="text-red-400">*</span>
                   </label>
                   <select
@@ -311,10 +305,10 @@ export default function ServicePortal() {
                     name="serviceType"
                     value={formData.serviceType}
                     onChange={handleChange}
-                    className={`form-input ${errors.serviceType ? 'border-red-400' : ''}`}
+                    className={`form-input w-full bg-void border ${errors.serviceType ? 'border-red-400' : 'border-white/10'} rounded-xl px-4 py-3 text-ink-1 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all`}
                   >
                     {serviceTypes.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
+                      <option key={opt.value} value={opt.value} className="bg-surface text-ink-1">
                         {opt.label}
                       </option>
                     ))}
@@ -327,7 +321,7 @@ export default function ServicePortal() {
 
               {/* Date */}
               <div>
-                <label htmlFor="preferredDate" className="form-label">
+                <label htmlFor="preferredDate" className="form-label text-ink-2 block mb-2 text-sm">
                   Preferred Date <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -337,7 +331,7 @@ export default function ServicePortal() {
                   value={formData.preferredDate}
                   onChange={handleChange}
                   min={today}
-                  className={`form-input ${errors.preferredDate ? 'border-red-400' : ''}`}
+                  className={`form-input w-full bg-void border ${errors.preferredDate ? 'border-red-400' : 'border-white/10'} rounded-xl px-4 py-3 text-ink-1 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all [color-scheme:dark]`}
                 />
                 {errors.preferredDate && (
                   <p className="text-red-400 text-xs mt-1">{errors.preferredDate}</p>
@@ -346,7 +340,7 @@ export default function ServicePortal() {
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="form-label">
+                <label htmlFor="message" className="form-label text-ink-2 block mb-2 text-sm">
                   Additional Message
                 </label>
                 <textarea
@@ -355,7 +349,7 @@ export default function ServicePortal() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="form-input resize-none"
+                  className="form-input w-full bg-void border border-white/10 rounded-xl px-4 py-3 text-ink-1 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all resize-none"
                   placeholder="Describe your issue or requirements..."
                 />
               </div>
@@ -364,15 +358,15 @@ export default function ServicePortal() {
               <button
                 type="submit"
                 disabled={submitting}
-                className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 btn-liquid ${
+                className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
                   submitting
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-ocean text-white hover:shadow-xl'
+                    ? 'bg-surface border border-white/10 text-ink-3 cursor-not-allowed'
+                    : 'btn-primary'
                 }`}
               >
                 {submitting ? (
                   <span className="inline-flex items-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-ink-3" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                     </svg>
@@ -386,6 +380,6 @@ export default function ServicePortal() {
           )}
         </div>
       </section>
-    </>
+    </div>
   )
 }

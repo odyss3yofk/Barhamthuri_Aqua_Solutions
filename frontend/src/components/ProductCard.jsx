@@ -1,100 +1,62 @@
 import { Link } from 'react-router-dom'
 import { formatPrice, getImageUrl } from '../utils/api'
 
-const gradientStyles = {
-  'product-gradient-1': 'from-ocean to-cyan',
-  'product-gradient-2': 'from-ocean-light to-cyan-light',
-  'product-gradient-3': 'from-ocean-dark to-cyan-dark',
-  'product-gradient-4': 'from-cyan to-ocean',
+const getCategoryColor = (category) => {
+  const cat = (category || '').toLowerCase()
+  if (cat.includes('domestic')) return 'text-sky bg-sky/10 border-sky/20'
+  if (cat.includes('industrial') || cat.includes('commercial')) return 'text-amber-400 bg-amber-400/10 border-amber-400/20'
+  if (cat.includes('chimney')) return 'text-purple-400 bg-purple-400/10 border-purple-400/20'
+  if (cat.includes('spare')) return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20'
+  return 'text-accent bg-accent/10 border-accent/20' // fallback
 }
 
-const categoryColors = {
-  Domestic: 'bg-blue-100 text-blue-800',
-  Industrial: 'bg-amber-100 text-amber-800',
-  Chimneys: 'bg-purple-100 text-purple-800',
-  Spares: 'bg-green-100 text-green-800',
-}
-
-export default function ProductCard({ product }) {
-  const gradientClass = gradientStyles[product.gradient] || 'from-ocean to-cyan'
-  const badgeClass = categoryColors[product.category] || 'bg-gray-100 text-gray-800'
-
+const ProductCard = ({ product }) => {
   return (
-    <Link
-      to={`/products/${product.slug}`}
-      className="group block card-hover rounded-2xl bg-white shadow-md overflow-hidden"
+    <Link 
+      to={`/products/${product.slug}`} 
+      className="card-dark bg-surface border border-white/7 rounded-2xl overflow-hidden group flex flex-col h-full transition-all duration-300 hover:border-accent/30"
     >
-      {/* Image or placeholder with gradient */}
-      <div
-        className={`relative h-48 sm:h-52 bg-gradient-to-br ${gradientClass} overflow-hidden flex items-center justify-center`}
-      >
+      <div className="relative h-48 w-full overflow-hidden bg-elevated">
         {product.image ? (
           <img 
             src={getImageUrl(product.image)} 
-            alt={product.name} 
-            className="w-full h-full object-cover"
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white/20 group-hover:text-white/30 transition-colors duration-500">
-              <svg
-                viewBox="0 0 100 100"
-                className="w-24 h-24 animate-float-slow"
-              >
-                <path
-                  d="M50 10 C35 30, 20 55, 50 80 C80 55, 65 30, 50 10Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
+          <div className="w-full h-full bg-gradient-to-br from-elevated to-void flex items-center justify-center">
+            <svg className="w-12 h-12 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 2C7 6 4 11 4 15.5a8 8 0 0016 0C20 11 17 6 12 2z" />
+            </svg>
           </div>
         )}
-        {/* Category badge */}
-        <div className="absolute top-3 left-3">
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}
-          >
-            {product.category}
-          </span>
-        </div>
-        {/* Featured badge */}
-        {product.isFeatured && (
-          <div className="absolute top-3 right-3">
-            <span className="px-2 py-1 rounded-full text-xs font-bold bg-yellow-400 text-yellow-900">
-              ⭐ Featured
+        
+        {product.category && (
+          <div className="absolute top-4 left-4">
+            <span className={`text-xs font-medium px-2.5 py-1 rounded-full border backdrop-blur-md ${getCategoryColor(product.category.name)}`}>
+              {product.category.name}
             </span>
           </div>
         )}
-        {/* Bottom overlay gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/20 to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="p-5">
-        <h3 className="font-bold text-lg text-charcoal group-hover:text-ocean transition-colors duration-300 mb-1 line-clamp-1">
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-lg font-semibold text-ink-1 mb-2 group-hover:text-accent transition-colors line-clamp-1">
           {product.name}
         </h3>
-        <p className="text-gray-500 text-sm mb-3 line-clamp-2 leading-relaxed">
-          {product.description}
+        
+        <p className="text-ink-2 text-sm line-clamp-2 mb-4 flex-grow">
+          {product.description || 'Premium water purification system designed for optimal performance.'}
         </p>
-        <div className="flex items-center justify-between">
-          <span className="text-xl font-bold text-ocean">
+        
+        <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/7">
+          <span className="text-accent font-bold">
             {formatPrice(product.price)}
           </span>
-          <span className="inline-flex items-center text-sm font-medium text-cyan group-hover:text-ocean transition-colors duration-300">
-            Details
-            <svg
-              className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+          
+          <span className="text-ink-2 group-hover:text-accent transition-colors">
+            <svg className="w-5 h-5 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </span>
         </div>
@@ -102,3 +64,5 @@ export default function ProductCard({ product }) {
     </Link>
   )
 }
+
+export default ProductCard

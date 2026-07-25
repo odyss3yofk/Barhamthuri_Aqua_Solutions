@@ -29,8 +29,8 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ocean"></div>
+            <div className="min-h-screen bg-void flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full border-2 border-surface border-t-accent animate-spin" />
             </div>
           }>
             <Routes>

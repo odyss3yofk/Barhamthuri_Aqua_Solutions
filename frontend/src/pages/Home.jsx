@@ -17,14 +17,24 @@ function CounterCard({ icon, value, suffix, label }) {
         if (entry.isIntersecting && !started.current) {
           started.current = true
           const duration = 2000
-          const step = value / (duration / 16)
-          const timer = setInterval(() => {
-            setCount(prev => {
-              const next = prev + step
-              if (next >= value) { clearInterval(timer); return value }
-              return Math.floor(next)
-            })
-          }, 16)
+          const startTime = performance.now()
+
+          const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime
+            const progress = Math.min(elapsed / duration, 1)
+            
+            // easeOutQuart easing function for a smooth slow-down
+            const easeProgress = 1 - Math.pow(1 - progress, 4)
+            
+            setCount(Math.floor(easeProgress * value))
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter)
+            } else {
+              setCount(value)
+            }
+          }
+          requestAnimationFrame(updateCounter)
         }
       },
       { threshold: 0.3 }
@@ -61,9 +71,8 @@ function RevealSection({ children, className = '', delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ${className} ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className={`transition-all duration-700 ${className} ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -72,10 +81,10 @@ function RevealSection({ children, className = '', delay = 0 }) {
 }
 
 const stats = [
-  { icon: '🏆', value: 10, suffix: '+', label: 'Years Experience' },
-  { icon: '😊', value: 5000, suffix: '+', label: 'Happy Customers' },
-  { icon: '📦', value: 100, suffix: '+', label: 'Products Available' },
-  { icon: '🛠️', value: 24, suffix: '/7', label: 'Expert Support' },
+  { icon: '🏆', value: '10', suffix: '+', label: 'Years Experience' },
+  { icon: '😊', value: '5000', suffix: '+', label: 'Happy Customers' },
+  { icon: '📦', value: '100', suffix: '+', label: 'Products Available' },
+  { icon: '🛠️', value: '24', suffix: '/7', label: 'Expert Support' },
 ]
 
 export default function Home() {
@@ -271,8 +280,8 @@ export default function Home() {
                 className="inline-flex items-center gap-2 btn-ghost text-base py-3 px-8 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/10 hover:border-emerald-500/50"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M11.998 0C5.372 0 0 5.373 0 12.003a11.975 11.975 0 001.64 6.072L0 24l6.063-1.621A11.943 11.943 0 0012 24c6.626 0 12-5.373 12-12.003C24 5.373 18.624 0 11.998 0z"/>
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path d="M11.998 0C5.372 0 0 5.373 0 12.003a11.975 11.975 0 001.64 6.072L0 24l6.063-1.621A11.943 11.943 0 0012 24c6.626 0 12-5.373 12-12.003C24 5.373 18.624 0 11.998 0z" />
                 </svg>
                 WhatsApp Us
               </a>

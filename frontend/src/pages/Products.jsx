@@ -121,7 +121,7 @@ export default function Products() {
           {!animating && filteredProducts.length > 0 && (
             <div className="mt-12 flex justify-center">
               <span className="inline-block px-4 py-1.5 rounded-full bg-surface border border-border text-ink-2 text-sm">
-                Showing {filteredProducts.length} product{filteredProducts.length !== 1 && 's'}
+                {`Showing ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`}
               </span>
             </div>
           )}

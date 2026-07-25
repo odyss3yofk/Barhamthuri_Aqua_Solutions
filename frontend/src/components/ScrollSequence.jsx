@@ -113,7 +113,16 @@ export default function ScrollSequence() {
 
     return () => {
       window.removeEventListener('resize', resize);
+      // Kill everything GSAP pinned — it patches body overflow/position
       gsapCtx.revert();
+      ScrollTrigger.killAll();
+      ScrollTrigger.clearScrollMemory();
+      // Forcibly reset any overflow styles GSAP may have left on body/html
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.documentElement.style.overflow = '';
     };
   }, [loaded]);
 

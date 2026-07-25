@@ -1,7 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, Suspense, lazy } from 'react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import gsap from 'gsap'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+
+gsap.registerPlugin(ScrollTrigger)
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'))
@@ -15,9 +19,21 @@ const NotFound = lazy(() => import('./pages/NotFound'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
+
   useEffect(() => {
+    // Kill ALL active ScrollTriggers whenever route changes.
+    // GSAP's pin: true adds inline styles to body/html — this guarantees cleanup.
+    ScrollTrigger.killAll()
+    ScrollTrigger.clearScrollMemory()
+    document.body.style.overflow = ''
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.width = ''
+    document.documentElement.style.overflow = ''
+
     window.scrollTo(0, 0)
   }, [pathname])
+
   return null
 }
 

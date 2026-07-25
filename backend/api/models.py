@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import compress_image
 
 
 class Category(models.TextChoices):
@@ -24,6 +25,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = compress_image(self.image)
+        super().save(*args, **kwargs)
 
 
 class ServiceType(models.TextChoices):
@@ -137,6 +143,11 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if self.cover_image:
+            self.cover_image = compress_image(self.cover_image)
+        super().save(*args, **kwargs)
+
 
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
@@ -149,5 +160,10 @@ class ProjectImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.project.title}"
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = compress_image(self.image)
+        super().save(*args, **kwargs)
 
 

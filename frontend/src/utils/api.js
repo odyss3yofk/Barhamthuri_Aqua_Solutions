@@ -26,13 +26,15 @@ export const fetchMilestones = async () => {
 export const fetchCoreValues = async () => {
   const response = await fetch(`${API_BASE_URL}/values/`);
   if (!response.ok) throw new Error('Failed to fetch core values');
-  return response.json();
+  const data = await response.json();
+  return data.results || data;
 };
 
 export const fetchProjects = async () => {
   const response = await fetch(`${API_BASE_URL}/projects/`);
   if (!response.ok) throw new Error('Failed to fetch projects');
-  return response.json();
+  const data = await response.json();
+  return data.results || data;
 };
 
 export const fetchProjectBySlug = async (slug) => {

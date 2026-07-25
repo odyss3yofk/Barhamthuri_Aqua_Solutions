@@ -2,12 +2,21 @@ import { Link } from 'react-router-dom'
 import { formatPrice, getImageUrl } from '../utils/api'
 
 const getCategoryColor = (category) => {
-  const cat = (category || '').toLowerCase()
-  if (cat.includes('domestic')) return 'text-sky bg-sky/10 border-sky/20'
-  if (cat.includes('industrial') || cat.includes('commercial')) return 'text-amber-400 bg-amber-400/10 border-amber-400/20'
-  if (cat.includes('chimney')) return 'text-purple-400 bg-purple-400/10 border-purple-400/20'
-  if (cat.includes('spare')) return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20'
-  return 'text-accent bg-accent/10 border-accent/20' // fallback
+  const cat = (category || '').toUpperCase()
+  if (cat === 'DOMESTIC') return 'text-sky-400 bg-sky-400/10 border-sky-400/20'
+  if (cat === 'INDUSTRIAL') return 'text-amber-400 bg-amber-400/10 border-amber-400/20'
+  if (cat === 'CHIMNEY') return 'text-purple-400 bg-purple-400/10 border-purple-400/20'
+  if (cat === 'SPARES') return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20'
+  return 'text-accent bg-accent/10 border-accent/20'
+}
+
+const getCategoryLabel = (category) => {
+  const cat = (category || '').toUpperCase()
+  if (cat === 'DOMESTIC') return 'Domestic'
+  if (cat === 'INDUSTRIAL') return 'Industrial'
+  if (cat === 'CHIMNEY') return 'Chimney'
+  if (cat === 'SPARES') return 'Spares'
+  return category || ''
 }
 
 const ProductCard = ({ product }) => {
@@ -33,8 +42,8 @@ const ProductCard = ({ product }) => {
         
         {product.category && (
           <div className="absolute top-4 left-4">
-            <span className={`text-xs font-medium px-2.5 py-1 rounded-full border backdrop-blur-md ${getCategoryColor(product.category.name)}`}>
-              {product.category.name}
+            <span className={`text-xs font-medium px-2.5 py-1 rounded-full border backdrop-blur-md ${getCategoryColor(product.category)}`}>
+              {getCategoryLabel(product.category)}
             </span>
           </div>
         )}

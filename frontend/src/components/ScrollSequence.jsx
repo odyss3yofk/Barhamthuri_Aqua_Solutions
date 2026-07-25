@@ -16,25 +16,39 @@ export default function ScrollSequence() {
   const [loaded, setLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // — Phase 1: Preload all frames —
+  // — Phase 1: Preload all frames (deferred so it doesn't block navigation) —
   useEffect(() => {
-    let loadedCount = 0;
+    let loadedCount = 0
+    let cancelled = false
 
-    for (let i = 0; i < frameCount; i++) {
-      const img = new Image();
-      img.src = currentFrame(i);
-      img.onload = () => {
-        loadedCount++;
-        setProgress(Math.round((loadedCount / frameCount) * 100));
-        if (loadedCount === frameCount) setLoaded(true);
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === frameCount) setLoaded(true);
-      };
-      imagesRef.current[i] = img;
+    const preload = () => {
+      for (let i = 0; i < frameCount; i++) {
+        const img = new Image()
+        img.src = currentFrame(i)
+        img.onload = () => {
+          if (cancelled) return
+          loadedCount++
+          setProgress(Math.round((loadedCount / frameCount) * 100))
+          if (loadedCount === frameCount) setLoaded(true)
+        }
+        img.onerror = () => {
+          if (cancelled) return
+          loadedCount++
+          if (loadedCount === frameCount) setLoaded(true)
+        }
+        imagesRef.current[i] = img
+      }
     }
-  }, []);
+
+    // Use requestIdleCallback if available to not block the main thread
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(preload, { timeout: 500 })
+      return () => { cancelled = true; cancelIdleCallback(id) }
+    } else {
+      const t = setTimeout(preload, 100)
+      return () => { cancelled = true; clearTimeout(t) }
+    }
+  }, [])
 
   // — Phase 2: Wire GSAP once all frames are ready —
   useEffect(() => {

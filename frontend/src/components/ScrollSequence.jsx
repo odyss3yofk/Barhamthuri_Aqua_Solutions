@@ -167,7 +167,7 @@ export default function ScrollSequence() {
               Pure Water.<br />
               <span className="text-gradient">Pure Life.</span>
             </h1>
-            <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-md">
+            <p className="text-white drop-shadow-md font-medium text-lg md:text-xl leading-relaxed mb-10 max-w-md">
               Scroll to explore our advanced water purification systems — engineered for homes and industries across North East India.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -175,7 +175,7 @@ export default function ScrollSequence() {
                 Explore Products
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </Link>
-              <Link to="/service" className="btn-ghost">
+              <Link to="/service" className="btn-ghost bg-white/10 border-transparent hover:bg-white/20 hover:border-white/10 text-white backdrop-blur-sm">
                 Book a Service
               </Link>
             </div>

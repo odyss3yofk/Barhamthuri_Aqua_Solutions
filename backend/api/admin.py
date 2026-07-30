@@ -4,9 +4,9 @@ from .models import Product, ServiceInquiry, ContactInquiry, SiteSetting, Milest
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'is_active', 'created_at')
-    list_editable = ('price', 'is_active')
-    list_filter = ('category', 'is_active', 'created_at')
+    list_display = ('name', 'category', 'price', 'is_bestseller', 'is_active', 'created_at')
+    list_editable = ('price', 'is_bestseller', 'is_active')
+    list_filter = ('category', 'is_bestseller', 'is_active', 'created_at')
     search_fields = ('name', 'description', 'slug')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_at',)

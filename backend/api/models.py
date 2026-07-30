@@ -18,6 +18,7 @@ class Product(models.Model):
     price = models.CharField(max_length=100, null=True, blank=True, help_text="Can be exact price or range (e.g., '35000-300000')")
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    is_bestseller = models.BooleanField(default=False, help_text="Show this product in the Best Sellers section on the Home page")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

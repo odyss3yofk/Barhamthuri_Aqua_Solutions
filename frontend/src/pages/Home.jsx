@@ -101,7 +101,10 @@ export default function Home() {
       ])
       if (st) setSettings(st)
       if (vals?.length) setFeatures(vals)
-      if (prods?.length) setFeatured(prods.slice(0, 4))
+      if (prods?.length) {
+        const bestsellers = prods.filter(p => p.is_bestseller)
+        setFeatured(bestsellers.length > 0 ? bestsellers.slice(0, 4) : prods.slice(0, 4))
+      }
     }
     loadData()
   }, [])

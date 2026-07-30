@@ -145,7 +145,7 @@ export default function ProductDetails() {
                     rel="noopener noreferrer"
                     className="flex-1 py-4 px-6 flex items-center justify-center gap-3 text-lg rounded-xl font-bold bg-[#25D366] text-white hover:bg-[#1ebd5a] transition-colors shadow-[0_0_20px_rgba(37,211,102,0.3)]"
                   >
-                    <img src="/assets/WhatsApp_icon.png" alt="WhatsApp" className="w-6 h-6 object-contain filter brightness-0 invert" />
+                    <img src="/assets/WhatsApp_icon.png" alt="WhatsApp" className="w-6 h-6 object-contain" />
                     Enquire on WhatsApp
                   </a>
                 </div>

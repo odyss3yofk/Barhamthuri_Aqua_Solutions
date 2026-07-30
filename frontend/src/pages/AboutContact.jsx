@@ -465,8 +465,8 @@ export default function AboutContact() {
                 className="block bg-surface rounded-2xl p-6 border border-white/10 transition-all hover:border-[#25D366]/50 hover:shadow-[0_0_15px_rgba(37,211,102,0.15)] group"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-center text-2xl flex-shrink-0">
-                    💬
+                  <div className="w-12 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-center flex-shrink-0">
+                    <img src="/assets/WhatsApp_icon.png" alt="WhatsApp" className="w-6 h-6 object-contain" />
                   </div>
                   <div>
                     <h4 className="font-bold text-ink-1 mb-1 group-hover:text-[#25D366] transition-colors">

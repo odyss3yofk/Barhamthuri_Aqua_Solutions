@@ -48,7 +48,7 @@ class ErrorBoundary extends React.Component {
 }
 
 function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   useEffect(() => {
     // Just in case old GSAP pins are still alive in memory, violently kill them on every route change
     try {
@@ -62,8 +62,20 @@ function ScrollToTop() {
     } catch (e) {
       // ignore
     }
-    window.scrollTo(0, 0)
-  }, [pathname])
+    
+    if (hash) {
+      // A small delay ensures the element is rendered before we try to scroll to it
+      setTimeout(() => {
+        const id = hash.replace('#', '')
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname, hash])
   return null
 }
 

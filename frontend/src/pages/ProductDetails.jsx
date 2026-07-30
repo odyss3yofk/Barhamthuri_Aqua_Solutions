@@ -134,7 +134,7 @@ export default function ProductDetails() {
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-12">
                   <Link
-                    to="/service"
+                    to="/service#booking-form"
                     className="btn-primary flex-1 py-4 px-6 text-center justify-center text-lg shadow-[0_0_20px_rgba(45,212,191,0.2)] rounded-xl font-bold"
                   >
                     Book Installation
@@ -143,9 +143,10 @@ export default function ProductDetails() {
                     href="https://wa.me/918753953744"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-ghost flex-1 py-4 px-6 text-center justify-center text-lg rounded-xl font-bold"
+                    className="flex-1 py-4 px-6 flex items-center justify-center gap-3 text-lg rounded-xl font-bold bg-[#25D366] text-white hover:bg-[#1ebd5a] transition-colors shadow-[0_0_20px_rgba(37,211,102,0.3)]"
                   >
-                    💬 Enquire on WhatsApp
+                    <img src="/assets/WhatsApp_icon.png" alt="WhatsApp" className="w-6 h-6 object-contain filter brightness-0 invert" />
+                    Enquire on WhatsApp
                   </a>
                 </div>
 

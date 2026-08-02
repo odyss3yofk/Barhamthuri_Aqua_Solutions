@@ -50,7 +50,7 @@ const OurWork = () => {
                 key={project.id || index}
                 className="gallery-frame block group relative overflow-hidden rounded-2xl bg-surface border border-white/7"
               >
-                <div className="aspect-w-16 aspect-h-10 w-full overflow-hidden">
+                <div className="aspect-[16/10] w-full overflow-hidden">
                   {project.cover_image ? (
                     <img
                       src={getImageUrl(project.cover_image)}

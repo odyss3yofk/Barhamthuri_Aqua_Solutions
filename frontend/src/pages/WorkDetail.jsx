@@ -99,7 +99,7 @@ const WorkDetail = () => {
                   className="group cursor-pointer flex flex-col"
                   onClick={() => openLightbox(idx)}
                 >
-                  <div className="gallery-frame relative rounded-2xl overflow-hidden bg-surface border border-white/7 aspect-w-4 aspect-h-3 mb-3">
+                  <div className="gallery-frame relative rounded-2xl overflow-hidden bg-surface border border-white/7 aspect-[3/4] mb-3">
                     <img 
                       src={getImageUrl(imgObj.image)} 
                       alt={imgObj.caption || `${project.title} photo ${idx + 1}`} 
